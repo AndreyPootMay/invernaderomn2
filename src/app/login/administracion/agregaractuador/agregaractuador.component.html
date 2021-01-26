@@ -1,0 +1,74 @@
+<div class="col-md-12" align="center">
+    <h1>Agregar actuador</h1>
+   
+    <div align="center">
+        <form class="col-md-5 " #registerForm="ngForm" (ngSubmit)=onSubmit(registerForm)>
+            <!--            <div class="form-group">
+                <label for="estado"> Estado</label>
+                <input type="text" name="estado" class="form-control" #estado="ngModel" [(ngModel)]="actuador.estado"
+                    required >
+                <small *ngIf="!estado.valid && estado.touched" class="invalid-feedback d-block">
+                    Ingrese un Tiempo válido solo numeros
+                </small>
+            </div>
+-->
+
+            <div class="form-group">
+                <label for="nombre"> Nombre</label>
+                <select name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="actuador.nombre">
+                    <option value="agua">Agua</option>
+                    <option value="luz">Luz</option>
+                    <option value="extractor">Extractor</option>
+                    <option value="ventilador">Ventilador</option>
+                </select>
+                <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">
+                    no existen datos o son incorrectos
+                </small>
+            </div>
+
+
+
+
+
+       
+
+            <div class="form-group">
+                <label for="caracteristica"> Carácteristicas del Actuador</label>
+                <select name="caracteristica" class="form-control" #estado="ngModel" required [(ngModel)]="actuador.caracteristica">
+                    <option  value="Sistema regadio">Sistema regadío</option>
+                    <option value="Sistema iluminacion">Sistema de iluminación </option>
+                    <option value="Sistema de extraccion de aire">Sistema de extracción de aire</option>
+                    <option value="Medir Humedad del suelo">Sistema de extracción de ventilacion</option>
+    
+    
+    
+                </select>
+                    
+               
+            </div>
+
+            <div class="form-group">
+                <label for="invernadero_id_invernadero"> Invernadero a asociar</label>
+                <select name="invernadero_id_invernadero" class="form-control" #invernadero_id_invernadero="ngModel"
+                    [(ngModel)]="actuador.invernadero_id_invernadero">
+
+                    <option *ngFor="let item of invernadero;let indice=index" [value]="item.id">
+                        {{item.placa}}
+                    </option>
+                </select>
+                <small *ngIf="!invernadero_id_invernadero.valid && invernadero_id_invernadero.touched"
+                    class="invalid-feedback d-block">
+                    Ingrese un invernadero valido
+                </small>
+            </div>
+
+            <input type="submit" value="registro" class="btn btn-success" [disabled]="registerForm.invalid">
+
+
+
+
+        </form>
+
+    </div>
+
+</div>

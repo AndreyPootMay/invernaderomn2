@@ -1,0 +1,225 @@
+<div class="row">
+    <div class="col-sm-9">
+        <h3><b>Control de las variables</b> </h3>
+    </div>
+    <div class="col-sm-3"><span> <b>Tiempo en Minutos</b></span></div>
+</div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-3">Rangos entre los que desea mantener su cultivo</div>
+    <div class="col-sm-2" align="center "> Medicion Actual</div>
+    <div class="col-sm-6"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-2 col-md-offset-1"><img src="assets/temperatura.jpeg" height="120" width="200"></div>
+
+
+    <div class="col-md-2">
+        <span><kbd>Rango de alerta Temperatura ambiente</kbd></span>
+        <br>
+        <span><kbd> {{tempMin}}° - {{tempMax}}° </kbd></span>
+
+    </div>
+    <div class="col-md-2" align="center ">
+        <kbd>Temperatura </kbd>
+        <br>
+
+        <span *ngIf="colorVerdeTemperatura()"><input readonly type="text"
+                style="background-color: #00ff00;width : 30px;" value="{{valorTemperatura}}"></span>
+        <span *ngIf="colorRojoTemperatura()"><input readonly type="text" style="background-color: #ff0000;width : 30px;"
+                value="{{valorTemperatura}}"></span>
+        <span *ngIf="colorNaranjoTemperatura()"><input readonly type="text"
+                style="background-color: #ff8000;width : 30px;" value="{{valorTemperatura}}"></span>
+
+    </div>
+
+    <div class="col-md-3">Encender luz para aumentar la Temperatura, tiempo en minutos.</div>
+    <div class="col-md-1">
+        <form #modelNew="ngForm" (ngSubmit)="prenderluz(modelNew)" id="formulariotemp">
+
+            <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="tiempoTemp.estado">
+                <option *ngFor="let n of nombres" value="{{n}}">{{n}} minutos</option>
+            </select>
+
+        </form>
+    </div>
+    <div class="col-md-2">
+        <input type="submit" value="Aceptar" class="btn btn-success" [disabled]="modelNew.invalid"
+            form="formulariotemp">
+
+        <form #modelNew="ngForm" (ngSubmit)="apagarluz(modelNew)">
+            <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="tiempoTemp.estado" hidden>
+
+            </select>
+
+            <input type="submit" value="Cancelar" class="btn btn-danger" [disabled]="modelNew.invalid">
+
+
+        </form>
+    </div>
+</div>
+<br>
+<!--Segundo Control-->
+<div class="row">
+    <div class="col-md-2 col-md-offset-1"><img src="assets/humedadAire.jpeg" height="120" width="200">
+    </div>
+    <div class="col-md-2">
+        <span><kbd> Rango de alerta porcentaje Humedad ambiente </kbd></span>
+        <br>
+        <span><kbd> {{humMin}}% - {{humMax}}% </kbd>
+        </span>
+
+    </div>
+    <div class="col-md-2" align="center ">
+        <kbd> Humedad Aire </kbd>
+        <br>
+        <span *ngIf="colorVerdeHumedad()"><input readonly type="text" style="background-color: #00ff00;width : 30px;"
+                value="{{valorHumedad}}"></span>
+        <span *ngIf="colorRojoHumedad()"><input readonly type="text" style="background-color: #ff0000;width : 30px;"
+                value="{{valorHumedad}}"></span>
+        <span *ngIf="colorNaranjoHumedad()"><input readonly type="text" style="background-color: #ff8000;width : 30px;"
+                value="{{valorHumedad}}"></span>
+
+
+    </div>
+    <div class="col-md-3">Activar ventilador, para reducir la Humedad presente en el ambiente, tiempo en minutos. </div>
+    <div class="col-md-1">
+        <form #modelNew="ngForm" (ngSubmit)="prenderventilador(modelNew)" id="formularioventilador">
+
+            <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="tiempoHum.estado">
+                <option *ngFor="let n of nombres" value="{{n}}">{{n}} minutos</option>
+            </select>
+        </form>
+    </div>
+    <div class="col-md-2">
+        <input type="submit" value="activar" class="btn btn-success" [disabled]="modelNew.invalid"
+            form="formularioventilador">
+        <form #modelNew="ngForm" (ngSubmit)="apagarventilador(modelNew)">
+            <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="tiempoHum.estado" hidden>
+
+            </select>
+
+            <input type="submit" value="Cancelar" class="btn btn-danger" [disabled]="modelNew.invalid">
+
+
+        </form>
+    </div>
+</div>
+<br>
+<!-- tercer control-->
+<div class="row">
+    <div class="col-md-2 col-md-offset-1"><img src="assets/humedad.jpeg" height="120" width="200"></div>
+    <div class="col-md-2">
+
+        <span><kbd> Rango de Alerta porcentaje de Humedad en el suelo</kbd></span>
+        <br>
+        <span><kbd> {{humSuelMin}}% - {{humSuelMax}}% </kbd></span>
+
+    </div>
+    <div class="col-md-2" align="center ">
+        <span><kbd> Humedad Suelo</kbd>
+            <br>
+            <span *ngIf="colorVerdeHumedadSuelo()"><input readonly type="text"
+                    style="background-color: #00ff00;width : 30px;" value="{{valorHumedadSuelo}}"></span>
+            <span *ngIf="colorRojoHumedadSuelo()"><input readonly type="text"
+                    style="background-color: #ff0000;width : 30px;" value="{{valorHumedadSuelo}}"></span>
+            <span *ngIf="colorNaranjoHumedadSuelo()"><input readonly type="text"
+                    style="background-color: #ff8000;width : 30px;" value="{{valorHumedadSuelo}}"></span>
+
+        </span>
+    </div>
+    <div class="col-md-3">Activar sistema de regadío, para aumentar la humedad del suelo, tiempo en minutos. </div>
+    <div class="col-md-1">
+        <form #modelNew="ngForm" (ngSubmit)="prenderagua(modelNew)" id="formularioagua">
+
+            <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="tiempoHumSuel.estado">
+                <option *ngFor="let n of nombres" value="{{n}}">{{n}} minutos</option>
+            </select>
+
+        </form>
+    </div>
+    <div class="col-md-2">
+        <input type="submit" value="Aceptar" class="btn btn-success" [disabled]="modelNew.invalid"
+            form="formularioagua">
+
+        <form #modelNew="ngForm" (ngSubmit)="apagaragua(modelNew)">
+            <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="tiempoHumSuel.estado" hidden>
+
+            </select>
+
+            <input type="submit" value="Cancelar" class="btn btn-danger" [disabled]="modelNew.invalid">
+
+
+        </form>
+    </div>
+
+</div>
+<br>
+<!--ultimo control-->
+<div class="row">
+    <div class="col-md-2 col-md-offset-1"><img src="assets/co2.jpeg" height="120" width="200"></div>
+    <div class="col-md-2">
+
+
+        <span><kbd> Rango de alerta calidad del aire CO<sub>2 </sub> </kbd> </span>
+        <br>
+        <span><kbd>{{co2Min}}% - {{co2Max}}% </kbd> </span>
+
+    </div>
+    <div class="col-md-2" align="center ">
+        <span><kbd> Nivel CO<sub>2 </sub> </kbd>
+            <br>
+            <span *ngIf="colorVerdeCo2()"><input readonly type="text" style="background-color: #00ff00;width : 30px;"
+                    value="{{valorCo2}}"></span>
+            <span *ngIf="colorRojoCo2()"><input readonly type="text" style="background-color: #ff0000;width : 30px;"
+                    value="{{valorCo2}}"></span>
+            <span *ngIf="colorNaranjoCo2()"><input readonly type="text" style="background-color: #ff8000;width : 30px;"
+                    value="{{valorCo2}}"></span>
+
+        </span>
+    </div>
+    <div class="col-md-3">Activar ventilador dos, para modificar la calidad del Aire presente en el ambiente,, tiempo en
+        minutos. </div>
+
+    <div class="col-md-1">
+        <form #modelNew="ngForm" (ngSubmit)="prenderventilador2(modelNew)" id="formularioventilador2">
+
+            <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="tiempoCo2.estado">
+                <option *ngFor="let n of nombres" value="{{n}}">{{n}} minutos</option>
+            </select>
+        </form>
+    </div>
+
+    <div class="col-md-2">
+        <input type="submit" value="activar" class="btn btn-success" [disabled]="modelNew.invalid"
+            form="formularioventilador2">
+        <form #modelNew="ngForm" (ngSubmit)="apagarventilador2(modelNew)">
+            <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="tiempoCo2.estado" hidden>
+
+            </select>
+
+            <input type="submit" value="Cancelar" class="btn btn-danger" [disabled]="modelNew.invalid">
+
+
+        </form>
+    </div>
+    <!-- Material checked -->
+
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm" style="color:rgb(44, 83, 255);">
+            <span> <b> Mediciones: </b> <input type="text" style="background-color: #00ff00; width: 30px;" readonly> <b>
+                    Nivel correcto</b></span>
+        </div>
+        <div class="col-sm" style="color:rgb(44, 83, 255);">
+            <input type="text" style="background-color: yellow; width: 30px;" readonly><b> Nivel en el limite</b>
+        </div>
+        <div class="col-sm" style="color:rgb(44, 83, 255);">
+            <input type="text" style="background-color: #ff0000; width: 30px;" readonly> <b> Nivel crítico fuera de
+                rango</b>
+        </div>
+    </div>
+</div>

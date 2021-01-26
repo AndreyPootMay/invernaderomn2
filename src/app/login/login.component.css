@@ -1,0 +1,18 @@
+.fondo{
+    height: 100vh;
+    
+    background-image: url("http://colvin.chillan.ubiobio.cl:8075/nicolas.quintana1501/fondo.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    
+
+
+}
+.imgRedonda {
+    width:300px;
+    height:300px;
+    border-radius:150px;
+    border:5px solid #666;
+}
